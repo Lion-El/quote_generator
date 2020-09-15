@@ -80,12 +80,21 @@ const famousQuotes = [
 /***
  * `getRandomQuote` function
 ***/
-
+function getRandomQuote()  {
+  randomNumber = Math.floor(Math.random() * 14);
+  return randomNumber;
+}
 
 
 /***
  * `printQuote` function
 ***/
+function printQuote() {
+  quote = getRandomQuote();
+  document.querySelector('p.quote').innerHTML = `${famousQuotes[quote].quote}`;
+  document.querySelector('p.source').innerHTML = `${famousQuotes[quote].source}`;
+}
+
 
 
 
