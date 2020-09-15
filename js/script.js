@@ -90,9 +90,9 @@ function getRandomQuote()  {
  * `printQuote` function
 ***/
 function printQuote() {
-  quote = getRandomQuote();
-  document.querySelector('p.quote').innerHTML = `${famousQuotes[quote].quote}`;
-  document.querySelector('p.source').innerHTML = `${famousQuotes[quote].source}`;
+  arrayIndex = getRandomQuote();
+  document.querySelector('p.quote').innerHTML = `${famousQuotes[arrayIndex].quote}`;
+  document.querySelector('p.source').innerHTML = `${famousQuotes[arrayIndex].source}`;
 }
 
 
