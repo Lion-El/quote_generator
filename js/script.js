@@ -91,21 +91,17 @@ function getRandomQuote()  {
 
 
 /***
- * Return a random object from an array and displaying the object values in the webpage 
+ * Return a random object from an array and display the object values in the webpage 
 ***/
 function printQuote() {
   let quotesObject = getRandomQuote();
   let htmlString = `<p class="quote">${quotesObject.quote}</p> <p class="source">${quotesObject.source}`;
   
-  if (htmlString) {
-    if (Object.keys(quotesObject).includes('citation')) {
+  if (Object.keys(quotesObject).includes('citation')) {
     htmlString +=  `<span class="citation"> ${quotesObject.citation}</span>`;
-    }
-    if (Object.keys(quotesObject).includes('year')) {
+  }
+  if (Object.keys(quotesObject).includes('year')) {
     htmlString +=  `<span class="citation"> ${quotesObject.year}</span>`;
-    }
-  } else  {
-    alert('Unreturned object');
   }
 
   htmlString += '</p>';
