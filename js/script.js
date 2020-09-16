@@ -3,15 +3,11 @@ Treehouse FSJS Techdegree:
 project 1 - A Random Quote Generator
 ******************************************/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
-
 /*** 
- * `quotes` array 
+ * An array of famous quotes 
 ***/
-const famousQuotes = [
-  {
+const quotes = [
+   {
     quote: 'Spread love everywhere you go. Let no one ever come to you leaving happier.',
     source: 'Mother Teressa'
    },
@@ -38,7 +34,7 @@ const famousQuotes = [
     source: 'Oprah Winfrey'
    },
    {
-    quote: `if you sest your goals ridiculously high and it's a failure, you will fail 
+    quote: `if you set your goals ridiculously high and it's a failure, you will fail 
     above everyone else's success.`,
     source: 'James Cameron'
    },
@@ -72,35 +68,64 @@ const famousQuotes = [
    {
     quote: 'You wll face many defeats in life, but never let yourself be defeated.',
     source: 'Maya Angelou'
+   },
+   {
+    quote: `I learned that courage was not the absence of fear, but the triumph over it.
+     The brave man is not he who does not feel afraid, but he who conquers that fear`,
+    source: 'Nelson Mandela',
+    citation: 'Book',
+    year: 2012
    }
 
 ];
 
 
 /***
- * `getRandomQuote` function
+ * Generate and return random whole numbers 
 ***/
 function getRandomQuote()  {
-  randomNumber = Math.floor(Math.random() * 14);
-  return randomNumber;
+  let randomNumber = Math.floor(Math.random() * 15);
+  let arrayObject = quotes[randomNumber];
+  return arrayObject;
 }
 
 
 /***
- * `printQuote` function
+ * Return a random object from an array and displaying the object values in the webpage 
 ***/
 function printQuote() {
-  arrayIndex = getRandomQuote();
-  document.querySelector('p.quote').innerHTML = `${famousQuotes[arrayIndex].quote}`;
-  document.querySelector('p.source').innerHTML = `${famousQuotes[arrayIndex].source}`;
+  let quotesObject = getRandomQuote();
+  let htmlString = `<p class="quote">${quotesObject.quote}</p> <p class="source">${quotesObject.source}`;
+  
+  if (htmlString) {
+    if (Object.keys(quotesObject).includes('citation')) {
+    htmlString +=  `<span class="citation"> ${quotesObject.citation}</span>`;
+    }
+    if (Object.keys(quotesObject).includes('year')) {
+    htmlString +=  `<span class="citation"> ${quotesObject.year}</span>`;
+    }
+  } else  {
+    alert('Unreturned object');
+  }
+
+  htmlString += '</p>';
+  document.getElementById('quote-box').innerHTML = htmlString;
 }
 
 
-
-
 /***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
+ * Automatic random quote and random background color refresh at 8 second intervals
+***/
+const randomHue = () => Math.floor(Math.random() * 256);
+
+function refreshPage() {
+  document.querySelector('body').style.backgroundColor = `rgb(${randomHue()}, ${randomHue()}, ${randomHue()})`;
+  printQuote();
+}
+
+setInterval(refreshPage, 8000);
+/***
+ * Execute printQuote function and display random quote in the webpage 
 ***/
 
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
