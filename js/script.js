@@ -74,7 +74,16 @@ const quotes = [
      The brave man is not he who does not feel afraid, but he who conquers that fear`,
     source: 'Nelson Mandela',
     citation: 'Book',
-    year: 2012
+    year: 2012,
+    influence: 'Mahatma Gandhi'
+   },
+   {
+    quote: `You may shoot me with your words, you may cut me with your eyes, you may kill me 
+    with your hatefulness, but still, like air, I'll rise!`,
+    source: 'Maya Angelou',
+    citation: 'Book',
+    year: 1994,
+    influence: 'James Baldwin'
    }
 
 ];
@@ -83,8 +92,10 @@ const quotes = [
 /***
  * Generate and return random whole numbers 
 ***/
+let randomNumber;
+
 function getRandomQuote()  {
-  let randomNumber = Math.floor(Math.random() * 15);
+  randomNumber = Math.floor(Math.random() * 16);
   let arrayObject = quotes[randomNumber];
   return arrayObject;
 }
@@ -93,15 +104,25 @@ function getRandomQuote()  {
 /***
  * Return a random object from an array and display the object values in the webpage 
 ***/
+let currentNumber;
+let quotesObject;
+
 function printQuote() {
-  let quotesObject = getRandomQuote();
+  do  {                                                                                                         //re-run randomQuote when quote repeats
+    quotesObject = getRandomQuote();
+  } while (currentNumber === randomNumber);
+  
+  currentNumber = randomNumber;
   let htmlString = `<p class="quote">${quotesObject.quote}</p> <p class="source">${quotesObject.source}`;
   
   if (Object.keys(quotesObject).includes('citation')) {
     htmlString +=  `<span class="citation"> ${quotesObject.citation}</span>`;
   }
   if (Object.keys(quotesObject).includes('year')) {
-    htmlString +=  `<span class="citation"> ${quotesObject.year}</span>`;
+    htmlString +=  `<span class="year"> ${quotesObject.year}</span>`;
+  }
+  if (Object.keys(quotesObject).includes('influence')) {                                                        //extra Object added to webpage
+    htmlString +=  `<span class="influence">influenced by: ${quotesObject.influence}</span>`;
   }
 
   htmlString += '</p>';
@@ -110,18 +131,41 @@ function printQuote() {
 
 
 /***
- * Automatic random quote and random background color refresh at 8 second intervals
+ * Random quote and random color
 ***/
-const randomHue = () => Math.floor(Math.random() * 256);
+const randomHue = () => Math.floor(Math.random() * 361);
 
 function refreshPage() {
-  document.querySelector('body').style.backgroundColor = `rgb(${randomHue()}, ${randomHue()}, ${randomHue()})`;
+  document.querySelector('body').style.backgroundColor = `hsl(${randomHue()}, 50%, 50%)`;
   printQuote();
 }
 
-setInterval(refreshPage, 8000);
 /***
- * Execute printQuote function and display random quote in the webpage 
+ * Reset interval/timer, refresh quote and background color
 ***/
+function resetInterval()  {
+  clearInterval(refresh);
+  refreshPage();
+  setTimeout(restartInterval);
+}
 
+function restartInterval()  {
+  refresh = setInterval(refreshPage, 8000);
+}
+
+/***
+ * Execute printQuote function 
+***/
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
+
+
+/***
+ * Execute resetInterval function
+***/
+document.getElementById('load-quote').addEventListener("click", resetInterval, false);
+
+
+/***
+ * Function call - automatic quote and background color refresh at 8 second intervals
+***/
+let refresh = setInterval(refreshPage, 8000);
