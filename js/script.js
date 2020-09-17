@@ -108,7 +108,7 @@ let currentNumber;
 let quotesObject;
 
 function printQuote() {
-  do  {                                                                                                         //re-run randomQuote when quote repeats
+  do  {                                                                                                         //re-run randomQuote if quote repeats
     quotesObject = getRandomQuote();
   } while (currentNumber === randomNumber);
   
