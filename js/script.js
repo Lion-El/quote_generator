@@ -1,6 +1,6 @@
 /******************************************
 Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
+project 1 - A Random Quote Generator - Exceeds expectation grade
 ******************************************/
 
 /*** 
@@ -75,7 +75,7 @@ const quotes = [
     source: 'Nelson Mandela',
     citation: 'Book',
     year: 2012,
-    influence: 'Mahatma Gandhi'
+    subject: 'Spiritual alchemy'
    },
    {
     quote: `You may shoot me with your words, you may cut me with your eyes, you may kill me 
@@ -83,26 +83,24 @@ const quotes = [
     source: 'Maya Angelou',
     citation: 'Book',
     year: 1994,
-    influence: 'James Baldwin'
+    subject: 'Poetry'
    }
 
 ];
 
 
 /***
- * Generate and return random whole numbers 
+ * Return random object 
 ***/
-let randomNumber;
-
 function getRandomQuote()  {
-  randomNumber = Math.floor(Math.random() * quotes.length);
+  let randomNumber = Math.floor(Math.random() * quotes.length);
   let arrayObject = quotes[randomNumber];
   return arrayObject;
 }
 
 
 /***
- * Return a random object from an array, display the object values and refresh background color
+ * Display the object values and refresh background color
 ***/
 let currentQuote;
 let quotesObject;
@@ -122,8 +120,8 @@ function printQuote() {
   if (Object.keys(quotesObject).includes('year')) {
     htmlString +=  `<span class="year"> ${quotesObject.year}</span>`;
   }
-  if (Object.keys(quotesObject).includes('influence')) {                                                        //extra Object added to webpage
-    htmlString +=  `<span class="influence">influenced by: ${quotesObject.influence}</span>`;
+  if (Object.keys(quotesObject).includes('year')) {                                                        //extra Object added to webpage
+    htmlString +=  `<span class="year">${quotesObject.subject}</span>`;
   }
 
   htmlString += '</p>';
@@ -133,7 +131,7 @@ function printQuote() {
 
 
 /***
- * Random quote and random hue
+ * Generate random number/hue and call printQuote function
 ***/
 const randomHue = () => Math.floor(Math.random() * 361);
 
