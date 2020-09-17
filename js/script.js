@@ -133,12 +133,11 @@ function printQuote() {
 
 
 /***
- * Random quote and random color
+ * Random quote and random hue
 ***/
 const randomHue = () => Math.floor(Math.random() * 361);
 
 function refreshPage() {
-  document.querySelector('body').style.backgroundColor = `hsl(${randomHue()}, 50%, 50%)`;
   printQuote();
 }
 
