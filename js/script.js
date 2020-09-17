@@ -95,24 +95,25 @@ const quotes = [
 let randomNumber;
 
 function getRandomQuote()  {
-  randomNumber = Math.floor(Math.random() * 16);
+  randomNumber = Math.floor(Math.random() * quotes.length);
   let arrayObject = quotes[randomNumber];
   return arrayObject;
 }
 
 
 /***
- * Return a random object from an array and display the object values in the webpage 
+ * Return a random object from an array, display the object values and refresh background color
 ***/
-let currentNumber;
+let currentQuote;
 let quotesObject;
 
 function printQuote() {
   do  {                                                                                                         //re-run randomQuote if quote repeats
     quotesObject = getRandomQuote();
-  } while (currentNumber === randomNumber);
+  } while (currentQuote === quotesObject.quote);
   
-  currentNumber = randomNumber;
+  currentQuote = quotesObject.quote;
+  
   let htmlString = `<p class="quote">${quotesObject.quote}</p> <p class="source">${quotesObject.source}`;
   
   if (Object.keys(quotesObject).includes('citation')) {
@@ -127,6 +128,7 @@ function printQuote() {
 
   htmlString += '</p>';
   document.getElementById('quote-box').innerHTML = htmlString;
+  document.querySelector('body').style.backgroundColor = `hsl(${randomHue()}, 50%, 50%)`;
 }
 
 
@@ -141,11 +143,10 @@ function refreshPage() {
 }
 
 /***
- * Reset interval/timer, refresh quote and background color
+ * Reset interval/timer
 ***/
 function resetInterval()  {
   clearInterval(refresh);
-  refreshPage();
   setTimeout(restartInterval);
 }
 
