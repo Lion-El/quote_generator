@@ -75,7 +75,7 @@ const quotes = [
     source: 'Nelson Mandela',
     citation: 'Book',
     year: 2012,
-    subject: 'Spiritual alchemy'
+    subject: 'Spiritual Alchemy'
    },
    {
     quote: `You may shoot me with your words, you may cut me with your eyes, you may kill me 
